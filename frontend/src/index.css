@@ -340,7 +340,240 @@ th {
   font-family: "SF Mono", Consolas, monospace;
 }
 
+.app-shell {
+  display: grid;
+  grid-template-columns: 224px 1fr;
+  min-height: 100vh;
+}
+
+.app-main {
+  min-width: 0;
+  padding: 25px 30px;
+  overflow: auto;
+}
+
+.sidebar {
+  padding: 22px 16px;
+  color: #e4e7ec;
+  background: var(--sidebar-bg);
+}
+
+.sidebar-brand {
+  display: block;
+  margin: 0 8px 28px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.topbar,
+.sidebar-backdrop {
+  display: none;
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Телефоны и узкие окна */
+@media (max-width: 760px) {
+  .app-shell {
+    display: block;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 12px;
+    color: #fff;
+    background: var(--sidebar-bg);
+  }
+
+  .topbar-title {
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 22px;
+    line-height: 1;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 52px;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+    width: min(280px, 85vw);
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+
+  .sidebar.open {
+    transform: none;
+  }
+
+  .sidebar-brand {
+    display: none;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 52px 0 0;
+    z-index: 35;
+    display: block;
+    background: rgba(16, 24, 40, 0.45);
+  }
+
+  .app-main {
+    padding: 16px;
+    overflow: visible;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .panel {
+    padding: 14px;
+  }
+
+  .grid2 {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .row.space {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .actions .btn {
+    flex: 1;
+  }
+
+  .kpis {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .kpi strong {
+    font-size: 18px;
+  }
+
+  .toast {
+    left: 16px;
+    right: 16px;
+    text-align: center;
+  }
+
+  .help {
+    display: block;
+    min-height: 0;
+  }
+
+  .help-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding: 12px 14px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .help-menu strong {
+    flex-basis: 100%;
+  }
+
+  .help-menu a {
+    padding: 4px 0;
+  }
+
+  .help-body {
+    padding: 14px;
+  }
+
+  .empty {
+    padding: 40px 16px;
+  }
+
+  /* Таблицы превращаются в карточки: каждая строка — блок «поле: значение» */
+  table.cards thead {
+    display: none;
+  }
+
+  table.cards,
+  table.cards tbody,
+  table.cards tr {
+    display: block;
+    width: 100%;
+  }
+
+  table.cards tr {
+    padding: 10px 0;
+    border-bottom: 1px solid #e4e7ec;
+  }
+
+  table.cards tr:last-child {
+    border-bottom: 0;
+  }
+
+  table.cards td {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    padding: 4px 0;
+    text-align: right;
+    border: 0;
+  }
+
+  table.cards td::before {
+    content: attr(data-label);
+    flex: none;
+    max-width: 50%;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: left;
+  }
+
+  table.cards td.cell-title {
+    display: block;
+    padding-bottom: 6px;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  table.cards td.cell-title::before,
+  table.cards td.cell-action::before {
+    content: none;
+  }
+
+  table.cards td.cell-action {
+    display: block;
+    padding-top: 8px;
+  }
+
+  table.cards td.cell-action .btn {
+    width: 100%;
+  }
 }

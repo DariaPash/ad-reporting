@@ -3,13 +3,13 @@ import { isAdmin, useCurrentUser } from "../../hooks/useCurrentUser";
 
 /** Боковая навигация. Раздел «Администрирование» виден только администратору —
  * это только UX, реальная проверка роли на бэкенде. */
-export function Sidebar() {
+export function Sidebar({ open = false }: { open?: boolean }) {
   const currentUser = useCurrentUser();
   const admin = isAdmin(currentUser);
 
   return (
-    <aside style={{ padding: "22px 16px", color: "#e4e7ec", background: "var(--sidebar-bg)" }}>
-      <NavLink to="/report/new" style={{ display: "block", margin: "0 8px 28px", fontSize: 17, fontWeight: 700, color: "#fff", textDecoration: "none" }}>
+    <aside id="app-sidebar" className={open ? "sidebar open" : "sidebar"}>
+      <NavLink to="/report/new" className="sidebar-brand">
         Ad Reporting
       </NavLink>
       <nav>

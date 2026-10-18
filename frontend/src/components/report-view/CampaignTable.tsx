@@ -7,7 +7,7 @@ export function CampaignTable({ rows, hasGoals }: { rows: ReportCampaignRow[]; h
     <div className="panel">
       <h2>По кампаниям</h2>
       <div className="table-scroll">
-        <table>
+        <table className="cards">
           <thead>
             <tr>
               <th>Кампания</th>
@@ -29,18 +29,18 @@ export function CampaignTable({ rows, hasGoals }: { rows: ReportCampaignRow[]; h
           <tbody>
             {rows.map((row) => (
               <tr key={row.campaign_id}>
-                <td>{row.campaign_name}</td>
-                <td>{formatKpi(row.kpi.cost, "money")}</td>
-                <td>{formatKpi(row.kpi.impressions, "int")}</td>
-                <td>{formatKpi(row.kpi.clicks, "int")}</td>
-                <td>{formatKpi(row.kpi.ctr, "percent")}</td>
-                <td>{formatKpi(row.kpi.cpc, "money")}</td>
+                <td className="cell-title">{row.campaign_name}</td>
+                <td data-label="Расходы">{formatKpi(row.kpi.cost, "money")}</td>
+                <td data-label="Показы">{formatKpi(row.kpi.impressions, "int")}</td>
+                <td data-label="Клики">{formatKpi(row.kpi.clicks, "int")}</td>
+                <td data-label="CTR">{formatKpi(row.kpi.ctr, "percent")}</td>
+                <td data-label="CPC">{formatKpi(row.kpi.cpc, "money")}</td>
                 {hasGoals && (
                   <>
-                    <td>{formatKpi(row.kpi.conversions, "int")}</td>
-                    <td>{formatKpi(row.kpi.cr, "percent")}</td>
-                    <td>{formatKpi(row.kpi.cpa, "money")}</td>
-                    <td>{formatKpi(row.kpi.cpl, "money")}</td>
+                    <td data-label="Действия">{formatKpi(row.kpi.conversions, "int")}</td>
+                    <td data-label="CR">{formatKpi(row.kpi.cr, "percent")}</td>
+                    <td data-label="CPA">{formatKpi(row.kpi.cpa, "money")}</td>
+                    <td data-label="CPL">{formatKpi(row.kpi.cpl, "money")}</td>
                   </>
                 )}
               </tr>

@@ -14,7 +14,7 @@ export function HistoryTable({ reports }: { reports: ReportSummaryOut[] }) {
   return (
     <div className="panel">
       <div className="table-scroll">
-        <table>
+        <table className="cards">
           <thead>
             <tr>
               <th>Дата формирования</th>
@@ -30,13 +30,13 @@ export function HistoryTable({ reports }: { reports: ReportSummaryOut[] }) {
               const goals = truncateNames(report.goal_names);
               return (
                 <tr key={report.id}>
-                  <td>{formatDateTime(report.created_at)}</td>
-                  <td>
+                  <td data-label="Дата формирования">{formatDateTime(report.created_at)}</td>
+                  <td data-label="Отчетный период">
                     {formatDate(report.date_from)} — {formatDate(report.date_to)}
                   </td>
-                  <td title={campaigns.title || undefined}>{campaigns.text}</td>
-                  <td title={goals.title || undefined}>{goals.text}</td>
-                  <td>
+                  <td data-label="Кампании" title={campaigns.title || undefined}>{campaigns.text}</td>
+                  <td data-label="Цели" title={goals.title || undefined}>{goals.text}</td>
+                  <td className="cell-action">
                     <button type="button" className="btn" onClick={() => navigate(`/reports/${report.id}`)}>
                       Открыть
                     </button>

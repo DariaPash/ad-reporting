@@ -26,7 +26,7 @@ export function OperationsTable({ operations }: { operations: OperationLogOut[] 
   return (
     <div className="panel">
       <div className="table-scroll">
-        <table>
+        <table className="cards">
           <thead>
             <tr>
               <th style={{ width: 160 }}>Время</th>
@@ -38,10 +38,10 @@ export function OperationsTable({ operations }: { operations: OperationLogOut[] 
           <tbody>
             {operations.map((op) => (
               <tr key={op.id}>
-                <td>{formatDateTime(op.started_at)}</td>
-                <td>{operationLabel(op)}</td>
-                <td>{statusBadge(op.status)}</td>
-                <td>{op.message ?? "—"}</td>
+                <td data-label="Время">{formatDateTime(op.started_at)}</td>
+                <td data-label="Операция">{operationLabel(op)}</td>
+                <td data-label="Статус">{statusBadge(op.status)}</td>
+                <td data-label="Описание">{op.message ?? "—"}</td>
               </tr>
             ))}
           </tbody>
